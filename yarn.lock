@@ -2,6 +2,21 @@
 # yarn lockfile v1
 
 
+"@types/backbone@^1.4.3":
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/@types/backbone/-/backbone-1.4.3.tgz#75dc6e55382e226788db8d796de346891d6b2256"
+  integrity sha512-PZVw2FckEbEJ+qh2hvtgpI/4p8yD3sRbA8FEO72k01/90SSH73GcLW3CqcYP5epwDpLl3cKrgK0yypQY4qiuEw==
+  dependencies:
+    "@types/jquery" "*"
+    "@types/underscore" "*"
+
+"@types/jquery@*":
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/@types/jquery/-/jquery-3.5.1.tgz#cebb057acf5071c40e439f30e840c57a30d406c3"
+  integrity sha512-Tyctjh56U7eX2b9udu3wG853ASYP0uagChJcQJXLUXEU6C/JiW5qt5dl8ao01VRj1i5pgXPAf8f1mq4+FDLRQg==
+  dependencies:
+    "@types/sizzle" "*"
+
 "@types/lodash@^4.14.158":
   version "4.14.158"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.158.tgz#b38ea8b6fe799acd076d7a8d7ab71c26ef77f785"
@@ -26,6 +41,16 @@
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
+
+"@types/sizzle@*":
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/@types/sizzle/-/sizzle-2.3.2.tgz#a811b8c18e2babab7d542b3365887ae2e4d9de47"
+  integrity sha512-7EJYyKTL7tFR8+gDbB6Wwz/arpGa0Mywk1TJbNzKzHtzbwVmY4HR9WqS5VV7dsBUKQmPNr192jHr/VpBluj/hg==
+
+"@types/underscore@*":
+  version "1.10.17"
+  resolved "https://registry.yarnpkg.com/@types/underscore/-/underscore-1.10.17.tgz#13315853257c818fbd10c5b1baff3f0170f3fb58"
+  integrity sha512-puV6Kw1HU/WKxyJgSkC0cQCv0UmNWZrjNIWqseDBOg4G3fE6yYXHWGI+9Sjha94FytbVChXPltmQRzCdFt932Q==
 
 ansi-align@^2.0.0:
   version "2.0.0"
