@@ -30,8 +30,20 @@ export default class ReactJointJS extends React.Component<Props> {
   paper: joint.dia.Paper = null as any;
   paperElement: React.RefObject<HTMLDivElement> = React.createRef();
 
-  foreignObjectMarkup = (width: number, height: number, id: string): string =>
-    `<foreignObject width="${width}px" height="${height}px" id="${id}" />`;
+  foreignObjectMarkup = (
+    width: number,
+    height: number,
+    id: string
+  ): joint.dia.MarkupJSON => [
+    {
+      tagName: "foreignObject",
+      attributes: {
+        width: `${width}px`,
+        height: `${height}px`,
+        id
+      }
+    }
+  ];
 
   componentDidMount() {
     this.paper = new joint.dia.Paper({
