@@ -23,7 +23,7 @@ type Props = {
   paperOptions: joint.dia.Paper.Options;
   nodes: Array<Node>;
   links: Array<joint.dia.Link>;
-  paperRef: (paper: joint.dia.Paper) => void;
+  paperRef?: (paper: joint.dia.Paper) => void;
 };
 
 export default class ReactJointJS extends React.Component<Props> {
@@ -60,6 +60,8 @@ export default class ReactJointJS extends React.Component<Props> {
       this.props.graph.addCell(link);
       link.toBack();
     });
+
+    this.props.paperRef && this.props.paperRef(this.paper);
 
     setTimeout(() => this.forceUpdate());
   }
