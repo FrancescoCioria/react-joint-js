@@ -6,7 +6,7 @@ type Props = {
   element: JSX.Element;
 };
 
-export default class GraphNodePortal extends React.Component<Props> {
+export default class Portal extends React.Component<Props> {
   render() {
     const containerNode = document.getElementById(this.props.id);
 

@@ -30,6 +30,9 @@ export default class ReactJointJS extends React.Component<Props> {
   paper: joint.dia.Paper = null as any;
   paperElement: React.RefObject<HTMLDivElement> = React.createRef();
 
+  foreignObjectMarkup = (width: number, height: number, id: string): string =>
+    `<foreignObject width="${width}px" height="${height}px" id="${id}" />`;
+
   componentDidMount() {
     this.paper = new joint.dia.Paper({
       // bad typings
@@ -43,13 +46,21 @@ export default class ReactJointJS extends React.Component<Props> {
     this.props.nodes.forEach(node => {
       const nodeElement = new joint.dia.Element({
         ...omit(node, "element"),
-        markup: `<g class="rotatable"><foreignObject width="${node.size.width}px" height="${node.size.height}px" id="node_${node.id}"></foreignObject></g>`
+        markup: this.foreignObjectMarkup(
+          node.size.width,
+          node.size.height,
+          `node_${node.id}`
+        )
       });
 
       node.ports.forEach(port =>
         nodeElement.addPort({
           ...omit(port, ["element", "size"]),
-          markup: `<foreignObject width="${port.size.width}px" height="${port.size.height}px" id="port_${port.id}" />`
+          markup: this.foreignObjectMarkup(
+            port.size.width,
+            port.size.height,
+            `port_${port.id}`
+          )
         })
       );
 
