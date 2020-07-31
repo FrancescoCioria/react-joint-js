@@ -43,6 +43,8 @@ export default class ReactJointJS extends React.Component<Props> {
       ...this.props.paperOptions
     });
 
+    this.paper.freeze();
+
     this.props.nodes.forEach(node => {
       const nodeElement = new joint.dia.Element({
         ...omit(node, "element"),
@@ -73,6 +75,8 @@ export default class ReactJointJS extends React.Component<Props> {
     });
 
     this.props.paperRef && this.props.paperRef(this.paper);
+
+    this.paper.unfreeze();
 
     setTimeout(() => this.forceUpdate());
   }
