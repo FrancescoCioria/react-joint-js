@@ -28,12 +28,13 @@ type Props = {
 
 export default class ReactJointJS extends React.Component<Props> {
   paper: joint.dia.Paper = null as any;
+  paperElement: React.RefObject<HTMLDivElement> = React.createRef();
 
   componentDidMount() {
     this.paper = new joint.dia.Paper({
       // bad typings
       ...({
-        el: document.getElementById("_paper"),
+        el: this.paperElement.current,
         model: this.props.graph
       } as joint.dia.Paper.Options),
       ...this.props.paperOptions
@@ -66,7 +67,7 @@ export default class ReactJointJS extends React.Component<Props> {
   render() {
     return (
       <React.Fragment>
-        <div className="react-joint-js-paper" id="_paper" />
+        <div className="react-joint-js-paper" ref={this.paperElement} />
         {this.props.nodes.map(node => {
           return (
             <React.Fragment key={node.id}>
