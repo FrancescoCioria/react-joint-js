@@ -1,0 +1,47 @@
+{
+  "name": "react-joint-js",
+  "version": "1.0.0",
+  "description": "React wrapper for JointJS",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "main": "lib",
+  "typings": "lib",
+  "scripts": {
+    "build": "rm -rf lib && mkdir lib && tsc",
+    "prepublishOnly": "yarn build",
+    "release-version": "smooth-release"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:FrancescoCioria/react-joint-js.git"
+  },
+  "keywords": [
+    "react",
+    "react-component",
+    "flex",
+    "flexbox"
+  ],
+  "author": {
+    "name": "Francesco Cioria",
+    "url": "https://github.com/FrancescoCioria"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FrancescoCioria/react-joint-js/issues"
+  },
+  "homepage": "https://github.com/FrancescoCioria/react-joint-js",
+  "dependencies": {
+    "jointjs": "^3.2.0",
+    "lodash": "^4.17.19"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.158",
+    "@types/react": "^16.9.43",
+    "@types/react-dom": "^16.9.8",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "typescript": "^3.9.7"
+  }
+}
