@@ -7,7 +7,7 @@ React JointJS aims at simplifying the integration with React by letting you rend
 ## Install
 
 ```
-yarn add react-joint-js
+yarn add react.joint
 ```
 
 ## Usage
@@ -130,4 +130,5 @@ type Props = {
 ```
 
 ## Under the hood
+
 React JointJS uses `foreignObject` and [portals](https://reactjs.org/docs/portals.html) to render your React components inside the `svg` created and managed by JointJS.
