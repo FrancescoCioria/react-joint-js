@@ -33,6 +33,7 @@
   },
   "homepage": "https://github.com/FrancescoCioria/react-joint-js",
   "dependencies": {
+    "fp-ts": "^2.8.1",
     "jointjs": "^3.2.0",
     "lodash": "^4.17.19"
   },
