@@ -2,8 +2,7 @@ import * as React from "react";
 import * as joint from "jointjs";
 import Portal from "./Portal";
 import omit = require("lodash/omit");
-import { Option, none, some, fold, isNone } from "fp-ts/lib/Option";
-import { identity } from "fp-ts/lib/function";
+import { Option, none, some, isNone, map } from "fp-ts/lib/Option";
 
 export type Port = joint.dia.Element.Port & {
   element: JSX.Element;
@@ -27,7 +26,7 @@ export type Props = {
   nodes: Array<Node>;
   links: Array<joint.dia.Link>;
   paperRef?: (paper: joint.dia.Paper) => void;
-  version?: string;
+  onInitialized?: () => void;
 };
 
 type State = {
@@ -59,18 +58,14 @@ export default class ReactJointJS extends React.Component<Props, State> {
   ];
 
   initializeGraph = () => {
-    const paper = fold<joint.dia.Paper, joint.dia.Paper>(
-      () =>
-        new joint.dia.Paper({
-          // bad typings
-          ...({
-            el: this.paperElement.current,
-            model: this.props.graph
-          } as joint.dia.Paper.Options),
-          ...this.props.paperOptions
-        }),
-      identity
-    )(this.paper);
+    const paper = new joint.dia.Paper({
+      // bad typings
+      ...({
+        el: this.paperElement.current,
+        model: this.props.graph
+      } as joint.dia.Paper.Options),
+      ...this.props.paperOptions
+    });
 
     paper.freeze();
 
@@ -111,28 +106,30 @@ export default class ReactJointJS extends React.Component<Props, State> {
     if (isNone(this.paper)) {
       this.paper = some(paper);
       this.props.paperRef && this.props.paperRef(paper);
-
-      // handles async render
-      (paper as any).on("render:done", () => {
-        if (!this.state.initialized) {
-          this.setState({ initialized: true });
-        }
-      });
     }
 
     // batch render all cells
-    paper.unfreeze();
+    paper.unfreeze({
+      // handles async render
+      afterRender: () => {
+        if (!this.state.initialized) {
+          this.setState({ initialized: true }, () => {
+            this.props.onInitialized && this.props.onInitialized();
+          });
+        }
+      }
+    });
   };
 
   componentDidMount() {
-    this.initializeGraph();
+    requestAnimationFrame(() => {
+      this.initializeGraph();
+    });
   }
 
-  componentDidUpdate(prevProps: Props) {
-    if (prevProps.version !== this.props.version) {
-      this.props.graph.clear();
-      this.setState({ initialized: false }, this.initializeGraph);
-    }
+  componentWillUnmount() {
+    this.props.graph.clear();
+    map<joint.dia.Paper, void>(paper => paper.unmount())(this.paper);
   }
 
   renderNodes = (): JSX.Element[] =>
